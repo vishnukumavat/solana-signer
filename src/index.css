@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 255, 255, 255;
+}
+
+.dark {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 30, 30, 36;
+  --background-end-rgb: 0, 0, 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  min-height: 100vh;
+}
+
+/* Extension compatibility */
+.ext-compatible {
+  position: static !important; 
+  isolation: auto !important;
+}
+
+/* Add a specific rule to ensure Grammarly UI elements are visible */
+grammarly-extension {
+  z-index: 100 !important;
+}
+
+@layer components {
+  .button-primary {
+    @apply bg-solana-purple hover:bg-purple-700 text-white font-bold py-2 px-4 rounded transition;
+  }
+  
+  .button-secondary {
+    @apply bg-solana-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition;
+  }
+  
+  .button-outlined {
+    @apply border border-solana-purple hover:bg-solana-purple/10 text-solana-purple dark:text-white font-bold py-2 px-4 rounded transition;
+  }
+
+  .input-field {
+    @apply border rounded py-2 px-4 w-full bg-transparent dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-solana-purple;
+  }
+}

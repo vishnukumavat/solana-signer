@@ -1,0 +1,26 @@
+/* Toggle Button CSS */
+.toggle-checkbox:checked {
+  transform: translateX(100%);
+  border-color: #6967E5; /* Solana purple */
+}
+
+.dark .toggle-checkbox:checked {
+  border-color: #05B1F8; /* Solana blue for dark mode */
+}
+
+.toggle-checkbox:checked + .toggle-label {
+  background-color: #6967E5; /* Solana purple */
+}
+
+.dark .toggle-checkbox:checked + .toggle-label {
+  background-color: #05B1F8; /* Solana blue for dark mode */
+}
+
+.toggle-label {
+  transition: background-color 0.2s ease-in-out;
+}
+
+.toggle-checkbox {
+  transform: translateX(0);
+  transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out;
+} 
