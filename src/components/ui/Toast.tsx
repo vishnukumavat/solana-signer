@@ -1,4 +1,3 @@
-import * as React from "react";
 import * as ToastPrimitives from "@radix-ui/react-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, CheckCircle, AlertCircle, Info } from "lucide-react";

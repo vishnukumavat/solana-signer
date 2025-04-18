@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, HTMLMotionProps } from 'framer-motion';
 
 type ButtonProps = {
   children: React.ReactNode;
@@ -14,6 +14,8 @@ type ButtonProps = {
   size?: 'sm' | 'md' | 'lg';
 };
 
+type MotionButtonProps = Omit<HTMLMotionProps<"button">, 'type'>;
+
 export function Button({
   children,
   variant = 'primary',
@@ -26,7 +28,7 @@ export function Button({
   fullWidth = false,
   size = 'md',
   ...props
-}: ButtonProps & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'>) {
+}: ButtonProps & MotionButtonProps) {
   const sizeClasses = {
     sm: 'text-xs px-3 py-2 h-8',
     md: 'text-sm px-4 py-2.5 h-10',

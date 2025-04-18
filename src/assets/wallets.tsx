@@ -1,5 +1,3 @@
-import React from 'react';
-
 // Import the image files from the images folder
 import phantomIcon from './images/phantomIcon.png';
 import solflareIcon from './images/solflareIcon.png';
