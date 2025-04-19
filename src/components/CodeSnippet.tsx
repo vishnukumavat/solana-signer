@@ -3,6 +3,7 @@ import { Copy, Check } from "lucide-react";
 import { JavaScriptIcon, PythonIcon, RustIcon, CLIIcon } from "../assets/languages";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark, oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { useTheme } from "../contexts/ThemeContext";
 
 interface CodeSnippetProps {
   snippets: {
@@ -16,15 +17,9 @@ export function CodeSnippet({ snippets }: CodeSnippetProps) {
   const [selectedLanguage, setSelectedLanguage] = useState<string>(snippets[0]?.language || "");
   const [copiedLanguage, setCopiedLanguage] = useState<string | null>(null);
 
-  // Detect dark mode using CSS media query
-  const isDarkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-  // Use state to keep track of theme changes
-  const [isDark, setIsDark] = useState(isDarkMode);
-
-  // Add listener for theme changes
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-    setIsDark(e.matches);
-  });
+  // Use the theme from ThemeContext
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
 
   const copyToClipboard = async (code: string, language: string) => {
     try {
