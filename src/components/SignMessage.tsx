@@ -373,7 +373,7 @@ export function SignMessage() {
     <>
       <div className="max-w-7xl mx-auto">
         <div className={`flex flex-col lg:flex-row gap-6 transition-all duration-300 ${showCodeExamples ? "lg:justify-between" : "lg:justify-center"}`}>
-          <div className="flex-1 lg:max-w-xl">
+          <div className={`flex-1 lg:max-w-xl transition-all duration-300 ${showCodeExamples ? "" : "lg:mx-auto"}`}>
             <AnimatePresence mode="wait">
               {!hasSigned ? (
                 <motion.div
@@ -793,23 +793,34 @@ export function SignMessage() {
           </div>
           
           {/* Code Examples Panel for large screens - only visible on lg and above when showCodeExamples is true */}
-          <div className={`hidden lg:block w-[600px] h-fit ${showCodeExamples ? 'opacity-100' : 'opacity-0 w-0 overflow-hidden'} transition-all duration-300`}>
-            <Card variant="elevated" className="dark:bg-gray-800 bg-white sticky top-4">
-              <CardHeader className="py-4">
-                <div className="flex items-center">
-                  <Code className="flex-shrink-0 mr-3 text-gray-500 dark:text-gray-400" size={20} />
-                  <div className="flex-1">
-                    <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200">Code Examples</h2>
-                    <p className="text-xs text-gray-600 dark:text-gray-400">Implement signing in your code</p>
+          <motion.div 
+            className="hidden lg:block h-fit"
+            initial={false}
+            animate={{
+              width: showCodeExamples ? "600px" : "0px",
+              opacity: showCodeExamples ? 1 : 0,
+              marginLeft: showCodeExamples ? "24px" : "0px"
+            }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            {showCodeExamples && (
+              <Card variant="elevated" className="dark:bg-gray-800 bg-white sticky top-4 overflow-hidden">
+                <CardHeader className="py-4">
+                  <div className="flex items-center">
+                    <Code className="flex-shrink-0 mr-3 text-gray-500 dark:text-gray-400" size={20} />
+                    <div className="flex-1">
+                      <h2 className="text-lg font-medium text-gray-800 dark:text-gray-200">Code Examples</h2>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">Implement signing in your code</p>
+                    </div>
                   </div>
-                </div>
-              </CardHeader>
+                </CardHeader>
 
-              <CardContent>
-                <CodeSnippet snippets={codeExamples} />
-              </CardContent>
-            </Card>
-          </div>
+                <CardContent>
+                  <CodeSnippet snippets={codeExamples} />
+                </CardContent>
+              </Card>
+            )}
+          </motion.div>
         </div>
       </div>
 
