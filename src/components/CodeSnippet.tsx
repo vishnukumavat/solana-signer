@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Copy, Check } from "lucide-react";
 import { JavaScriptIcon, PythonIcon, RustIcon, CLIIcon } from "../assets/languages";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -14,12 +14,19 @@ interface CodeSnippetProps {
 }
 
 export function CodeSnippet({ snippets }: CodeSnippetProps) {
-  const [selectedLanguage, setSelectedLanguage] = useState<string>(snippets[0]?.language || "");
+  const [selectedLanguage, setSelectedLanguage] = useState<string>("");
   const [copiedLanguage, setCopiedLanguage] = useState<string | null>(null);
 
   // Use the theme from ThemeContext
   const { theme } = useTheme();
   const isDark = theme === "dark";
+  
+  // Set the default selected language whenever snippets change or on first render
+  useEffect(() => {
+    if (snippets.length > 0 && (!selectedLanguage || !snippets.find(s => s.language === selectedLanguage))) {
+      setSelectedLanguage(snippets[0].language);
+    }
+  }, [snippets, selectedLanguage]);
 
   const copyToClipboard = async (code: string, language: string) => {
     try {
